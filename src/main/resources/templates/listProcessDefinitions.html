@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<link th:href="@{/style/main.css}" type="text/css" rel="stylesheet" media="screen,projection"/>
+<title>List Process Definitions</title>
+</head>
+<body>
+<h1>Process Definitions</h1>
+<table>
+    <thead>
+      <tr>
+          <th data-field="id">ID</th>
+          <th data-field="name">Name</th>
+	      <th data-field="description">Description</th>
+	      <th data-field="version">Version</th>
+	      <th data-field="key">Key</th>
+	      <th data-field="formKey">Form Key</th>
+	      <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="pd : ${processDefinitions}">
+         <td th:text="${pd.id}">ID</td>
+         <td th:text="${pd.name}">Name</td>
+         <td th:text="${pd.description}">Desc</td>
+         <td th:text="${pd.version}">Version</td>
+         <td th:text="${pd.key}">Key</td>
+         <td th:text="${pd.formKey}">Form Key</td>
+         <td>
+            <a th:href="@{/start(processDefinitionId=${pd.id})}">Start an Instance</a>
+         </td>
+      </tr>
+    </tbody>
+</table>
+</body>
+</html>

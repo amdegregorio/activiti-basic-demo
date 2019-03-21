@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<link th:href="@{/style/main.css}" type="text/css" rel="stylesheet" media="screen,projection"/>
+<title>Start Event Monitoring</title>
+</head>
+<body>
+<h1>Event</h1>
+<h4>Enter event details to start event monitoring process</h4>
+<div class="input-form">
+<form th:action="@{/completeTask}" th:object="${eventDto}" method="post">
+   <div>
+     <input th:field="*{id}" id="id" type="hidden"/>
+     <input th:field="*{eventProcessInstanceId}" id="eventProcessInstanceId" type="hidden"/>
+     <input th:field="*{taskId}" id="taskId" type="hidden"/>
+     <input th:field="*{eventProcessDefinitionId}" id="eventProcessDefinitionId" type="hidden"/>
+     <label class="active" for="description">Description</label>
+     <span th:text="*{description}"></span>
+	 <input th:field="*{description}" id="description" type="hidden"/>
+   </div>
+   <div>
+     <label class="active" for="eventTimestamp">Event Date/Time</label>
+     <span th:text="*{eventTimestamp}"></span>
+     <input th:field="*{eventTimestamp}" id="eventTimestamp" type="hidden" placeholder="MM/dd/yy HH:mm"/>
+   </div>
+   <div>
+     <label class="active" for="comment">Comment</label>
+	 <input th:field="*{comment}" id="comment" type="text"/>
+   </div>
+   <div>
+     <label for="severity">Priority</label>
+         <select id="severity" th:field="*{severity}">
+            <option value="0" selected="selected">-- Please select one --</option>
+		    <option th:each="severityOpt : ${severities}"
+	                  th:value="${severityOpt.key}"
+	                  th:text="${severityOpt.value}"></option>
+	      </select>
+   </div>
+   <div>
+     <button type="submit" name="save">Save</button>
+     <button type="submit" name="cancel" formnovalidate="formnovalidate">Cancel</button>
+   </div>
+</form>
+</div>
+</body>
+</html>

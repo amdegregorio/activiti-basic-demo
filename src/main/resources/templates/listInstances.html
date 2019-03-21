@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<link th:href="@{/style/main.css}" type="text/css" rel="stylesheet" media="screen,projection"/>
+<title>List Process Instances</title>
+</head>
+<body>
+<div style="overflow:auto;">
+  <div class="far-right">
+     <ul>
+       <li><a href="/">Process Definitions</a></li>
+       <li><a href="/myTasks">My Tasks</a></li>
+     </ul>
+  </div>
+  <h1 class="left">Process Instances</h1>
+</div>
+<table>
+    <thead>
+      <tr>
+          <th data-field="id">ID</th>
+          <th data-field="name">Name</th>
+	      <th data-field="startDate">Start Date</th>
+	      <th data-field="initiator">Initiator</th>
+	      <th data-field="status">Status</th>
+	      <th data-field="activeActivities">Active Activities</th>
+	      <th data-field="processDefinitionId">Process Definition</th>
+	      <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="instance : ${instances}">
+         <td th:text="${instance.id}">ID</td>
+         <td th:text="${instance.name}">Name</td>
+         <td th:text="${instance.startDate}">Start Date</td>
+         <td th:text="${instance.initiator}">Initiator</td>
+         <td th:text="${instance.status}">Status</td>
+         <td>
+           <ul>
+             <li th:each="activity : ${instance.activeActivities}">
+                <span th:text="${activity}"></span>
+             </li>
+           </ul>
+         </td>
+         <td>
+           <p th:text="${instance.processDefinitionId}"></p>
+           <p th:text="${instance.processDefinitionKey}"></p>
+         </td>
+         <td>
+            <!-- <a th:href="@{/start">Start an Instance</a>  -->
+         </td>
+      </tr>
+    </tbody>
+</table>
+</body>
+</html>

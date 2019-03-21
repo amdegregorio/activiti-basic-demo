@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<link th:href="@{/style/main.css}" type="text/css" rel="stylesheet" media="screen,projection"/>
+<title>List Tasks</title>
+</head>
+<body>
+<div style="overflow:auto;">
+   <div class="far-right">
+      <ul>
+        <li><a href="/">Process Definitions</a></li>
+        <li><a href="/instances">Process Instances</a></li>
+        <li><a href="/myTasks">My Tasks</a></li>
+      </ul>
+   </div>
+   <h1 class="left" th:inline="text">[[${whose}]] Tasks</h1>
+</div>
+<table>
+    <thead>
+      <tr>
+          <th data-field="name">Name</th>
+          <th data-field="owner">Owner</th>
+          <th data-field="assignee">Assignee</th>
+	      <th data-field="createdDate">Created Date</th>
+	      <th data-field="dueDate">Due Date</th>
+	      <th data-field="priority">Priority</th>
+	      <th data-field="status">Status</th>
+	      <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="task : ${tasks}">
+         <td th:text="${task.name}">Name</td>
+         <td th:text="${task.owner}">Owner</td>
+         <td th:text="${task.assignee}">Assignee</td>
+         <td th:text="${task.createdDate}">Created Date</td>
+         <td th:text="${task.dueDate}">Due Date</td>
+         <td th:text="${task.priority}">Priority</td>
+         <td th:text="${task.status}">Status</td>
+         <td>
+            <a th:href="@{/reviewTask(taskId=${task.id})}">Review</a>
+         </td>
+      </tr>
+    </tbody>
+</table>
+</body>
+</html>
